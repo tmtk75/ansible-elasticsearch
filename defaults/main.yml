@@ -1,0 +1,4 @@
+---
+# default vars for elasticsearch
+consul_enabled: false
+

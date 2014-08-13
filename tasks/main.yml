@@ -1,7 +1,8 @@
 ---
 # tasks for elasticsearch
 - command: rpm --import http://packages.elasticsearch.org/GPG-KEY-elasticsearch
-- template: src=templates/elasticsearch.repo dest=/etc/yum.repos.d/elasticsearch.repo mode=0644 owner=root
+- template: src=./etc/yum.repos.d/elasticsearch.repo dest=/etc/yum.repos.d/elasticsearch.repo mode=0644 owner=root
+- yum: name=java-1.7.0-openjdk-devel
 - yum: name=elasticsearch
 - service: name=elasticsearch state=started
 - copy: src=./etc/consul.d/elasticsearch.json dest=/etc/consul.d/elasticsearch.json

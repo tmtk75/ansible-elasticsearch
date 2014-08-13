@@ -106,8 +106,8 @@ galaxy_info:
   #- cloud:gce
   #- cloud:rax
   #- clustering
-  #- database
-  #- database:nosql
+  - database
+  - database:nosql
   #- database:sql
   #- development
   #- monitoring

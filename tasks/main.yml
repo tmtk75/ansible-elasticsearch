@@ -12,5 +12,3 @@
 
 - copy: src=./etc/consul.d/elasticsearch.json dest=/etc/consul.d/elasticsearch.json
   when: consul_enabled
-  notify:
-    - restart consul

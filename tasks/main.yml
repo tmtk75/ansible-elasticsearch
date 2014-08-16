@@ -10,5 +10,8 @@
 
 - service: name=elasticsearch state=started
 
+- file: path=/etc/consul.d mode=0755 state=directory
+  when: consul_enabled
+
 - template: src=./etc/consul.d/elasticsearch.json dest=/etc/consul.d/elasticsearch.json
   when: consul_enabled

@@ -2,10 +2,10 @@
   "service": {
     "name": "elasticsearch",
     "tags": [],
-    "port": 9200,
+    "port": {{ consul_service_port }},
     "check": {
-      "script": "curl localhost:9200 >/dev/null 2>&1",
-      "interval": "30s"
+      "script": "curl --retry 1 --retry-max-time 1 --max-time 1 -s localhost:9200 >/dev/null 2>&1",
+      "interval": "{{ consul_service_check_interval }}"
     }
   }
 }

@@ -1,4 +1,5 @@
 ---
 # default vars for elasticsearch
 consul_enabled: false
-
+consul_service_port: 9200
+consul_service_check_interval: "30s"

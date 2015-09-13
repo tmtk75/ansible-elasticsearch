@@ -1,17 +1,30 @@
 ---
 # tasks for elasticsearch
-- command: rpm --import http://packages.elasticsearch.org/GPG-KEY-elasticsearch
+- name: GPG key
+  tags: [elasticsearch, elasticsearch.gpg]
+  command: rpm --import http://packages.elasticsearch.org/GPG-KEY-elasticsearch
 
-- template: src=./etc/yum.repos.d/elasticsearch.repo dest=/etc/yum.repos.d/elasticsearch.repo mode=0644 owner=root
+- name: yum.repos.d
+  tags: [elasticsearch, elasticsearch.yum]
+  template: src=./etc/yum.repos.d/elasticsearch.repo dest=/etc/yum.repos.d/elasticsearch.repo mode=0644 owner=root
 
-- yum: name=java-1.7.0-openjdk-devel
+- name: yum
+  tags: [elasticsearch, elasticsearch.yum]
+  yum: name={{ item }}
+  with_items:
+  - java-1.7.0-openjdk-devel
+  - elasticsearch
 
-- yum: name=elasticsearch
+- name: service
+  tags: [elasticsearch, elasticsearch.service]
+  service: name=elasticsearch state=started
 
-- service: name=elasticsearch state=started
-
-- file: path=/etc/consul.d mode=0755 state=directory
+- name: consul config
+  tags: [elasticsearch, elasticsearch.consul]
   when: consul_enabled
+  template: src=./etc/consul.d/elasticsearch.json dest=/etc/consul.d/elasticsearch.json
 
-- template: src=./etc/consul.d/elasticsearch.json dest=/etc/consul.d/elasticsearch.json
+- name: consul reload
+  tags: [elasticsearch, elasticsearch.consul]
   when: consul_enabled
+  service: name=consul state=reloaded

@@ -12,8 +12,8 @@
   tags: [elasticsearch, elasticsearch.yum]
   yum: name={{ item }}
   with_items:
-  - java-1.7.0-openjdk-devel
-  - elasticsearch
+  - java-1.8.0-openjdk-devel
+  - elasticsearch-1.7.1
 
 - name: service
   tags: [elasticsearch, elasticsearch.service]
